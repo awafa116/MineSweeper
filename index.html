@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <!-- FontAwesome -->
@@ -25,9 +25,114 @@
     />
     <title>WinMine</title>
   </head>
+  <!-------------------------------------------------------
+                      N A V B A R
+  -------------------------------------------------------->
+  <body class="dark">
+    <!-- navbar -->
+    <div class="navbar fr">
+      <h1 class="logo">
+        win
+        <span>mine</span>
+      </h1>
+      <!-- settings menu -->
+      <button class="settings elevated">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+      <div class="settings-menu">
+        <div class="dark-mode">
+          dark mode:
+          <div id="dark-mode-button" class="on"></div>
+        </div>
+        <a class="about-btn">about</a>
+      </div>
+    </div>
+    <!-- About Window -->
+    <div class="about-window">
+      <div class="title">
+        <h1>How to play</h1>
+        <i class="fa-solid fa-xmark close-about"></i>
+      </div>
+      <ul>
+        <li>Click on the fields to open them.</li>
+        <li>The number in the field indicates the amount of bombs surrounding it.</li>
+        <li>Open all the empty fields to win the game.</li>
+      </ul>
+      <p>
+        <span>Careful :</span>
+        If you open a bomb field, You lose!
+      </p>
+      <div class="author">
+        <img src="./images/author.jpg" alt="Portrait of the game developer" />
+        <div class="author-name">
+          <h2>Developed by</h2>
+          <h1>Mustafa Ahmed Saeed</h1>
+        </div>
+      </div>
+    </div>
 
-  <body>
-    <!-- Script -->
+    <!-------------------------------------------------------
+                      T H E   G A M E
+    -------------------------------------------------------->
+    <div class="container">
+      <!-- Counters -->
+      <div class="header">
+        <div class="counters-container fr">
+          <div class="time-counter fr">
+            <i class="fa-solid fa-hourglass-end"></i>
+            <span class="time">00:00</span>
+          </div>
+          <div class="bombs-counter fr">
+            <i class="fa-solid fa-bomb"></i>
+            <span class="bombs"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Board -->
+      <div class="grid nine"></div>
+    </div>
+
+    <!-- Start Window -->
+    <div class="start-container elevated">
+      <h2 class="choice-name">Board Size</h2>
+      <div class="choices-container">
+        <button id="six-button" class="choice pushed">6x9</button>
+        <button id="nine-button" class="choice elevated">9x12</button>
+      </div>
+      <h2 class="choice-name">Difficulty</h2>
+      <div class="choices-container">
+        <button id="easy-button" class="choice pushed">easy</button>
+        <button id="hard-button" class="choice elevated">hard</button>
+      </div>
+      <button class="start">
+        <i class="fa-solid fa-play"></i>
+        Start Game!
+      </button>
+    </div>
+
+    <!-- Result Window -->
+    <div class="result-container elevated">
+      <h2 class="result-title">You Lost!</h2>
+      <p class="result-time">
+        <i class="fa-solid fa-hourglass-end"></i>
+        10:34
+      </p>
+      <button class="play-again">
+        <i class="fa-solid fa-arrow-rotate-right"></i>
+        Play Again
+      </button>
+    </div>
+
+    <!-------------------------------------------------------
+                        S C R I P T S
+    -------------------------------------------------------->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"
+      integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="./app.js"></script>
   </body>
 </html>
