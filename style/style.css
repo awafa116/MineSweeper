@@ -6,13 +6,13 @@
   font-family: "Poppins", sans-serif;
 }
 
-/******************************************
-            U T I L I T I E S
-*****************************************/
 :root {
   font-size: 12px;
 }
 
+/******************************************
+            U T I L I T I E S
+*****************************************/
 body {
   --one: #00a9fc;
   --two: #c240fe;
@@ -88,7 +88,7 @@ button {
 }
 
 /******************************************
-            G A M E   S T Y L E
+       N A V I G A T I O N   B A R
 *****************************************/
 .navbar {
   width: 100%;
@@ -102,47 +102,6 @@ button {
   border-radius: 0 0 3rem 3rem;
   position: relative;
   z-index: 50;
-}
-
-body {
-  overflow: hidden;
-  background-color: var(--primary);
-  position: relative;
-  height: calc(100vh - calc(100vh - 100%));
-}
-
-.container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 100%;
-  margin-top: 13rem;
-  opacity: 0;
-}
-
-.header {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.counters-container {
-  width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin-bottom: 3rem;
 }
 
 .logo {
@@ -256,95 +215,48 @@ body {
   border-top: 1em solid var(--highlight);
 }
 
-.about-window {
-  position: absolute;
-  top: 18rem;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  z-index: 20;
-  width: 90%;
-  max-width: 400px;
-  background-color: var(--highlight);
-  color: var(--text);
-  padding: 4rem 5rem 5rem;
-  border-radius: 2em;
-  display: none;
+/******************************************
+            G A M E   S T Y L E
+*****************************************/
+body {
+  overflow: hidden;
+  background-color: var(--primary);
+  position: relative;
+  height: calc(100vh - calc(100vh - 100%));
 }
 
-.about-window .title {
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  margin-top: 13rem;
+  opacity: 0;
+}
+
+.header {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.counters-container {
+  width: 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  margin-bottom: 4rem;
-}
-
-.about-window .title h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  border-bottom: 2px solid var(--three);
-  padding-bottom: 0.2em;
-}
-
-.about-window i {
-  opacity: 0.7;
-  font-size: 2.5rem;
-  cursor: pointer;
-}
-
-.about-window i:hover {
-  opacity: 1;
-}
-
-.about-window li {
-  font-size: 1.3rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
-}
-
-.about-window p {
-  font-size: 1.3rem;
-  margin-bottom: 4rem;
-}
-
-.about-window p span {
-  font-weight: 700;
-}
-
-.about-window .author {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  padding-top: 3rem;
-  border-top: 3px var(--primary) solid;
-}
-
-.about-window .author img {
-  width: 4.5rem;
-  height: 4.5rem;
-  border-radius: 50%;
-  margin-right: 1.5rem;
-}
-
-.about-window .author .author-name h2 {
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-.about-window .author .author-name h1 {
-  font-size: 1.3rem;
-  font-weight: 600;
+  margin-bottom: 3rem;
 }
 
 .time-counter,
@@ -391,6 +303,10 @@ body {
 
 .time-counter {
   min-width: 50%;
+}
+
+.bombs-counter {
+  min-width: 40%;
 }
 
 .start-container,
@@ -487,6 +403,97 @@ body {
   margin-right: 0.5em;
 }
 
+.about-window {
+  position: absolute;
+  top: 15rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: 20;
+  width: 90%;
+  max-width: 450px;
+  background-color: var(--highlight);
+  color: var(--text);
+  padding: 4rem 5rem 5rem;
+  border-radius: 2em;
+  display: none;
+}
+
+.about-window .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.about-window .title h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--three);
+  padding-bottom: 0.2em;
+}
+
+.about-window i {
+  opacity: 0.7;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.about-window i:hover {
+  opacity: 1;
+}
+
+.about-window li {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.about-window p {
+  font-size: 1.3rem;
+  margin-bottom: 4rem;
+}
+
+.about-window p span {
+  font-weight: 700;
+}
+
+.about-window .author {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding-top: 3rem;
+  border-top: 3px var(--primary) solid;
+}
+
+.about-window .author img {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  margin-right: 1.5rem;
+}
+
+.about-window .author .author-name h2 {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.about-window .author .author-name h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
 .six {
   --cell-size: 4rem;
   --gap-size: 1.5rem;
@@ -554,7 +561,7 @@ body {
 }
 
 /******************************************
-         M E D I A   Q U E R I E S
+         S C R E E N   S I Z E S
 *****************************************/
 @media screen and (max-width: 500px) {
   :root {
@@ -565,7 +572,7 @@ body {
   }
   .about-window {
     position: absolute;
-    top: 15rem;
+    top: 13rem;
   }
 }
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Style -->
     <link rel="stylesheet" href="./style/style.css" />
-    <!-- Favicon -->
+    <!-- Page Icon -->
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- FontAwesome -->
+    <!-- FontAwesome (for icons) -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -23,17 +23,17 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>WinMine</title>
+    <!-- Page Title -->
+    <title>MineSweeper</title>
   </head>
-  <!-------------------------------------------------------
-                      N A V B A R
-  -------------------------------------------------------->
-  <body class="dark">
-    <!-- navbar -->
+  <body class="light">
+    <!-------------------------------------------------------
+                N A V I G A T I O N   B A R
+    -------------------------------------------------------->
     <div class="navbar fr">
       <h1 class="logo">
-        win
-        <span>mine</span>
+        Mine
+        <span>Sweeper</span>
       </h1>
       <!-- settings menu -->
       <button class="settings elevated">
@@ -42,7 +42,7 @@
       <div class="settings-menu">
         <div class="dark-mode">
           dark mode:
-          <div id="dark-mode-button" class="on"></div>
+          <div id="dark-mode-button" class="off"></div>
         </div>
         <a class="about-btn">about</a>
       </div>
@@ -57,6 +57,7 @@
         <li>Click on the fields to open them.</li>
         <li>The number in the field indicates the amount of bombs surrounding it.</li>
         <li>Open all the empty fields to win the game.</li>
+        <li>Right-click on a field to flag it (for Desktop version only).</li>
       </ul>
       <p>
         <span>Careful :</span>
@@ -78,10 +79,12 @@
       <!-- Counters -->
       <div class="header">
         <div class="counters-container fr">
+          <!-- Timer -->
           <div class="time-counter fr">
             <i class="fa-solid fa-hourglass-end"></i>
             <span class="time">00:00</span>
           </div>
+          <!-- Bombs counter -->
           <div class="bombs-counter fr">
             <i class="fa-solid fa-bomb"></i>
             <span class="bombs"></span>
@@ -127,12 +130,14 @@
     <!-------------------------------------------------------
                         S C R I P T S
     -------------------------------------------------------->
+    <!-- GSAP CDN -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"
       integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="./app.js"></script>
+    <!-- Script file -->
+    <script src="./scripts/app.js"></script>
   </body>
 </html>

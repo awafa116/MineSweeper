@@ -1,12 +1,14 @@
+// Define global elements and variables
 const container = document.querySelector(".container");
 const grid = document.querySelector(".grid");
 const startWindow = document.querySelector(".start-container");
 const resWindow = document.querySelector(".result-container");
+const bombCounter = document.querySelector(".bombs");
 let width = 6;
 let height = 9;
 let difficulty = "easy";
 let bombAmount = 10;
-let flagged = 0;
+let flags = 0;
 let squares = [];
 let time = "";
 let minutes = 0;
@@ -15,7 +17,7 @@ let isStarted = false;
 let isClickable = false;
 let isStartable = true;
 
-// Start Game widow
+// Start the Game
 const sixBtn = document.getElementById("six-button");
 const nineBtn = document.getElementById("nine-button");
 const easyBtn = document.getElementById("easy-button");
@@ -65,7 +67,7 @@ hardBtn.addEventListener("click", () => {
   difficulty = "hard";
 });
 
-// start game
+// listen for click on start game button
 const startBtn = document.querySelector(".start");
 startBtn.addEventListener("click", () => {
   if (width === 6) {
@@ -85,11 +87,10 @@ startBtn.addEventListener("click", () => {
   }
   start();
 });
-
 function start() {
   if (!isStartable) return;
   if (!isStarted) startTimer();
-  const bombCounter = document.querySelector(".bombs");
+  flags = 0;
   bombCounter.innerText = bombAmount;
   // animating start window out
   const startTl = gsap.timeline({ defaults: { duration: 0.8, ease: "power3.out" } });
@@ -101,16 +102,16 @@ function start() {
   setTimeout(renderBoard, 800);
 }
 
-// Render Board
+// Render the Game Board
 function renderBoard() {
-  // Random bombs
+  // Get Random bombs array
   const grid = document.querySelector(".grid");
   const bombArr = Array(bombAmount).fill("bomb");
   const emptyArr = Array(width * height - bombAmount).fill("empty");
   const gameArr = bombArr.concat(emptyArr);
   const shuffledArr = shuffle(gameArr);
 
-  // Create fields
+  // Create the fields according to board size
   grid.innerHTML = "";
   for (let i = 0; i < width * height; i++) {
     const square = document.createElement("div");
@@ -118,18 +119,32 @@ function renderBoard() {
     square.classList.add("square", "elevated", shuffledArr[i]);
     grid.appendChild(square);
     squares.push(square);
-    square.addEventListener("click", function () {
+    // to Listen for Normal Click (Open Field)
+    square.addEventListener("click", () => {
       if (!isClickable) return;
       click(square);
     });
+    // to Listen for Right Click (Flag Field)
+    square.addEventListener(
+      "contextmenu",
+      e => {
+        if (!isClickable) return;
+        e.preventDefault();
+        flag(square);
+        bombCounter.innerText = bombAmount - flags;
+        return false;
+      },
+      false
+    );
   }
 
-  // Fill fields with numbers
+  // Fill fields with numbers of bombs surrounding it
   for (let i = 0; i < squares.length; i++) {
     let number = 0;
     const isRightEdge = i % width === width - 1;
     const isLeftEdge = i % width === 0;
 
+    // if the field doesn't contain a bomb
     if (squares[i].classList.contains("empty")) {
       // check LEFT field
       if (i > 0 && !isLeftEdge && squares[i - 1].classList.contains("bomb")) number++;
@@ -164,7 +179,7 @@ function renderBoard() {
       squares[i].setAttribute("data", number);
     }
   }
-  // animating
+  // animating Game Board in
   const board = document.querySelector(".container");
   gsap.set(board, { display: "flex" });
   gsap.fromTo(
@@ -174,7 +189,7 @@ function renderBoard() {
   );
 }
 
-// Shuffle Array
+// Shuffle Array (used to generate random array in line:112)
 function shuffle(array) {
   let currentIndex = array.length,
     randomIndex;
@@ -191,12 +206,10 @@ function shuffle(array) {
   return array;
 }
 
-// when click on field
+// when a field is clicked, this function is called
 function click(square) {
   const fieldId = square.id;
   if (square.classList.contains("pushed")) return;
-  // if (square.classList.contains("flagged")) return;
-
   // change field style
   square.classList.add("pushed");
   square.classList.remove("elevated");
@@ -205,14 +218,26 @@ function click(square) {
   if (square.classList.contains("bomb")) {
     const bombs = document.querySelectorAll(".bomb");
     bombs.forEach(field => {
+      field.classList.remove("flagged");
       field.innerHTML = '<i class="fa-solid fa-bomb"></i>';
       field.classList.add("pushed");
       field.classList.remove("elevated");
     });
     showResult("lose");
-  } else {
+  }
+  // if the field is not a bomb, open it
+  else {
+    // remove the flag if the field is flagged
+    if (square.classList.contains("flagged")) {
+      square.classList.remove("flagged");
+      flags--;
+      bombCounter.innerText = bombAmount - flags;
+    }
+    // fill the field with the number of bombs surrounding it
     let number = square.getAttribute("data");
-    if (number != 0) {
+    if (number == 0) {
+      square.innerText = "";
+    } else {
       if (number == 1) square.classList.add("one");
       else if (number == 2) square.classList.add("two");
       else square.classList.add("three");
@@ -221,6 +246,7 @@ function click(square) {
     // check for win
     const pushed = document.querySelectorAll(".pushed");
     if (width * height - pushed.length == bombAmount) showResult("win");
+    // open all empty fields around this filed
     checkNeighbor(square, fieldId);
   }
 }
@@ -290,6 +316,24 @@ function checkNeighbor(square, fieldId) {
   }, 10);
 }
 
+// Flag the square (called when a field is right-clicked)
+function flag(square) {
+  if (square.classList.contains("pushed")) return;
+  // remove the flag if the field is flagged
+  if (square.classList.contains("flagged")) {
+    square.classList.remove("flagged");
+    square.innerHTML = "";
+    flags--;
+  }
+  // add the flag
+  else {
+    square.classList.add("flagged");
+    square.innerHTML = '<i class="fa-solid fa-flag"></i>';
+    flags++;
+  }
+}
+
+// Show the Game Result
 function showResult(result) {
   const resTitle = document.querySelector(".result-title");
   const resTime = document.querySelector(".result-time");
@@ -302,6 +346,7 @@ function showResult(result) {
   }
   resTime.innerText = time;
 
+  // Animating game board out, and result window in
   const resTl = gsap.timeline({ defaults: { duration: 0.8, ease: "power3.out" } });
   if (result === "lose") {
     resTl.fromTo(grid, { x: "1rem" }, { x: 0, duration: 1, ease: "elastic.out(1.5, 0.2)" });
@@ -316,10 +361,11 @@ function showResult(result) {
   minutes = 0;
   seconds = 0;
 
-  // cick on play again
+  // Listen for clicks on play again button
   playAgainBtn.addEventListener("click", playAgain);
 }
 
+// Play again function (called when play again button is clicked)
 function playAgain() {
   const againTl = gsap.timeline({ defaults: { duration: 0.8, ease: "power3.out" } });
   againTl.to(resWindow, { y: "3rem", opacity: 0 });
@@ -416,3 +462,7 @@ aboutClose.addEventListener("click", () => {
   aboutTl.fromTo(aboutWindow, { y: 0, opacity: 1 }, { y: "3rem", opacity: 0 });
   aboutTl.set(aboutWindow, { display: "none" });
 });
+
+/*********************************************
+              The code is done
+ *********************************************/
